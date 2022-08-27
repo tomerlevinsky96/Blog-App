@@ -1,2 +1,2 @@
-A Blog app is an app where it contains different types of blogs from different geners including sciense fiction,horror,musical,food, etc.
-The user can register as a reader or a writer in the app,the writers could add their own posts and the reader can choose  which gener they would like to read posts from .
+A Blog app is an app where it contains different blogs from different geners including science  fiction,horror,musical,food, etc.
+The user can register as a reader or a writer ,the writer can add his own blogs and post them and the reader can choose from which gener and writer he wants to read the blogs  .
