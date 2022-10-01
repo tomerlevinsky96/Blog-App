@@ -5,14 +5,12 @@ from . import db
 
 views = Blueprint("views", __name__)
 
-
 @views.route("/")
 @views.route("/home")
 @login_required
 def home():
     posts = Post.query.all()
     return render_template("home.html", user=current_user, posts=posts)
-
 
 @views.route("/create-post", methods=['GET', 'POST'])
 @login_required
@@ -30,7 +28,6 @@ def create_post():
             return redirect(url_for('views.home'))
 
     return render_template('create_post.html', user=current_user)
-
 
 @views.route("/delete-post/<id>")
 @login_required
