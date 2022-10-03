@@ -1,9 +1,23 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
+<html>
+  <title></title>
+  <style>
+    body
+    {
+     background-image:url({{url_for('static',filename="blog-word.jpg")}})
+    }
+     form
+    {
+     style="color:red"
+    }
+  </style>
+</html>
 <form method="POST">
-  <h3 align="center">Login</h3>
+  <h1 style="color:red" align="center" >welcome to the bloggers app</h1>
+  <h3  style="color:red" align="center">Sign in</h3>
   <div class="form-group">
-    <label for="email">Email Address</label>
+    <label style="color:red" for="email">Email Address</label>
     <input
       type="text"
       id="email"
@@ -11,7 +25,7 @@
       class="form-control"
       placeholder="Enter Email"
     />
-    <label for="password">Password</label>
+    <label style="color:red" for="password">Password</label>
     <input
       type="password"
       id="password"
