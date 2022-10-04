@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from . import db
+from .forms import commentForm, PostForm
 
 views = Blueprint("views", __name__)
 
@@ -18,7 +19,8 @@ def home():
 @login_required
 def create_post():
     if request.method == "POST":
-        text = request.form.get('text')
+        form=PostForm()
+        text=form.text.data
 
         if not text:
             flash('Post cannot be empty', category='error')
@@ -65,7 +67,8 @@ def posts(username):
 @views.route("/create-comment/<post_id>", methods=['POST'])
 @login_required
 def create_comment(post_id):
-    text = request.form.get('text')
+    form = commentForm()
+    text = form.text.data
 
     if not text:
         flash('Comment cannot be empty.', category='error')
