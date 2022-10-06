@@ -21,11 +21,12 @@ def create_post():
     if request.method == "POST":
         form=PostForm()
         text=form.text.data
-
+        topic=form.topic.data
+        category=form.category.data
         if not text:
             flash('Post cannot be empty', category='error')
         else:
-            post = Post(text=text, author=current_user.id)
+            post = Post(topic=topic,text=text, author=current_user.id,category=category)
             db.session.add(post)
             db.session.commit()
             flash('Post created!', category='success')
@@ -38,10 +39,11 @@ def create_post():
 @login_required
 def delete_post(id):
     post = Post.query.filter_by(id=id).first()
-
+    print(current_user.id)
+    print(post.author)
     if not post:
         flash("Post does not exist.", category='error')
-    elif current_user.id != post.id:
+    elif current_user.id != post.author:
         flash('You do not have permission to delete this post.', category='error')
     else:
         db.session.delete(post)
@@ -119,3 +121,4 @@ def like(post_id):
         db.session.commit()
 
     return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
+

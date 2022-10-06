@@ -17,9 +17,10 @@ class SignUpForm(FlaskForm):
     Birthday = DateField('Birthday', validators=[DataRequired()])
 
 class PostForm(FlaskForm):
+    category = StringField('category', validators=[DataRequired()])
+    topic=StringField('topic',validators=[DataRequired()])
     text=StringField('text',validators=[DataRequired()])
 
 class commentForm(FlaskForm):
     text=StringField('text',validators=[DataRequired()])
-
 

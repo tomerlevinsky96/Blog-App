@@ -1,8 +1,20 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">Make a Post</h1>
-
+<h1 align="center">Make a Blog</h1>
 <form method="POST">
+  <h4>Choose a category </h4>
+  <select name="category" id="category">
+    <option value="Art">Art</option>
+    <option value="horror">horror</option>
+    <option value="science">science</option>
+    <option value="cooking/food">cooking/food</option>
+    <option value="science_fiction">science fiction</option>
+  </select>
+  <p></p>
+  <h4>Enter a topic</h4>
+  <textarea name="topic" id="topic" class="form-control"></textarea>
+   <p></p>
+  <h4>Enter the content</h4>
   <textarea name="text" id="text" class="form-control"></textarea>
   <br />
   <div align="center">

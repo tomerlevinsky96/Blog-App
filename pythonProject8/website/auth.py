@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash,make_response
 from . import db
 from .models import User
 from flask_login import login_user, logout_user, login_required, current_user
@@ -13,7 +13,6 @@ def login():
     if request.method == 'POST':
         form=LoginForm()
         email=form.email.data
-        print(email)
         password=form.password.data
         user = User.query.filter_by(email=email).first()
         if user:
@@ -34,7 +33,6 @@ def sign_up():
     if request.method == 'POST':
         form = SignUpForm()
         email=form.email.data
-        print(email)
         firstName=form.FirstName.data
         lastName=form.LastName.data
         password=form.password.data
@@ -56,9 +54,20 @@ def sign_up():
 
     return render_template("signup.html", user=current_user)
 
+@auth.route("/about")
+def about():
+ return render_template("about.html", user=current_user)
 
 @auth.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("views.home"))
+
+
+
+
+
+
+
+

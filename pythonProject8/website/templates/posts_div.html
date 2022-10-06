@@ -1,14 +1,22 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
-<h1 align="center">{% block header %}Posts{% endblock %}</h1>
+<h1 align="center">{% block header %}Blogs{% endblock %}</h1>
 <div id="posts">
   {% for post in posts %}
   <div class="card border-dark">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <a href="/posts/{{post.user.username}}">{{post.user.username}}</a>
+      <br>
+      <a>Author's First Name:{{post.user.FirstName}}</a>
+      </br>
+      <br>
+      <a>Author's Last Name:{{post.user.LastName}}</a>
+      </br>
+      <br>
+      <a>category:{{post.category}}</a>
+      </br>
       <div>
         <span id="likes-count-{{post.id}}">
-        {{ post.likes|length }}</span> 
+        {{ post.likes|length }}</span>
         {% if user.id in post.likes|map(attribute="author")|list %}
         <i
           class="fas fa-thumbs-up"
@@ -40,6 +48,7 @@
       </div>
     </div>
     <div class="card-body">
+      <H3>{{post.topic}}</H3>
       <div class="card-text">{{post.text}}</div>
       <br />
       <div class="collapse" id="comments-{{post.id}}">
@@ -110,8 +119,10 @@
 <div align="center">
   <a href="/create-post"
     ><button type="button" class="btn btn-primary btn-lg">
-      Create a Post
+      Create a Blog
     </button></a
   >
 </div>
+
+
 {% endblock %} {% endblock %}
