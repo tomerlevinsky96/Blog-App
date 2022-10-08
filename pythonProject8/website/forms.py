@@ -23,4 +23,3 @@ class PostForm(FlaskForm):
 
 class commentForm(FlaskForm):
     text=StringField('text',validators=[DataRequired()])
-

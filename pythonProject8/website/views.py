@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 from .models import Post, User, Comment, Like
 from . import db
-from .forms import commentForm, PostForm
+from .forms import PostForm,commentForm
 
 views = Blueprint("views", __name__)
 
@@ -19,18 +19,18 @@ def home():
 @login_required
 def create_post():
     if request.method == "POST":
-        form=PostForm()
-        text=form.text.data
-        topic=form.topic.data
-        category=form.category.data
-        if not text:
-            flash('Post cannot be empty', category='error')
-        else:
-            post = Post(topic=topic,text=text, author=current_user.id,category=category)
-            db.session.add(post)
-            db.session.commit()
-            flash('Post created!', category='success')
-            return redirect(url_for('views.home'))
+       form=PostForm()
+       category = form.category.data
+       topic= form.topic.data
+       text= form.text.data
+       if not text:
+         flash('Post cannot be empty',category='error')
+       else:
+          post = Post(topic=topic,text=text, author=current_user.id,category=category )
+          db.session.add(post)
+          db.session.commit()
+          flash('Post created!', category='success')
+          return redirect(url_for('views.home'))
 
     return render_template('create_post.html', user=current_user)
 
@@ -39,16 +39,18 @@ def create_post():
 @login_required
 def delete_post(id):
     post = Post.query.filter_by(id=id).first()
-    print(current_user.id)
-    print(post.author)
     if not post:
         flash("Post does not exist.", category='error')
     elif current_user.id != post.author:
         flash('You do not have permission to delete this post.', category='error')
     else:
-        db.session.delete(post)
-        db.session.commit()
-        flash('Post deleted.', category='success')
+      for comment in post.comments:
+         db.session.delete(comment)
+      for like in post.likes:
+         db.session.delete(like)
+      db.session.delete(post)
+      db.session.commit()
+      flash('Post deleted.', category='success')
 
     return redirect(url_for('views.home'))
 
@@ -69,9 +71,8 @@ def posts(username):
 @views.route("/create-comment/<post_id>", methods=['POST'])
 @login_required
 def create_comment(post_id):
-    form = commentForm()
+    form=commentForm()
     text = form.text.data
-
     if not text:
         flash('Comment cannot be empty.', category='error')
     else:
@@ -121,4 +122,3 @@ def like(post_id):
         db.session.commit()
 
     return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
-
