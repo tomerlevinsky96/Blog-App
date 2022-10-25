@@ -6,7 +6,7 @@
   <div class="card border-dark">
     <div class="card-header d-flex justify-content-between align-items-center">
       <br>
-      <a>Author's First Name:{{post.user.FirstName}}</a>
+      <a href="/posts/{{post.user.id}}">Author's First Name:{{post.user.FirstName}}</a>
       </br>
       <br>
       <a>Author's Last Name:{{post.user.LastName}}</a>
@@ -56,8 +56,8 @@
             {% for comment in post.comments %}
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <a href="/posts/{{comment.user.username}}"
-                  >{{comment.user.username}}</a
+                <a href="/posts/{{comment.user.id}}"
+                  >{{comment.user.FirstName}}</a
                 >: {{comment.text}}
               </div>
               <div>

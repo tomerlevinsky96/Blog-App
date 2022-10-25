@@ -55,17 +55,17 @@ def delete_post(id):
     return redirect(url_for('views.home'))
 
 
-@views.route("/posts/<username>")
+@views.route("/posts/<id>")
 @login_required
-def posts(username):
-    user = User.query.filter_by(username=username).first()
+def posts(id):
+    user = User.query.filter_by(id=id).first()
 
     if not user:
         flash('No user with that username exists.', category='error')
         return redirect(url_for('views.home'))
 
     posts = user.posts
-    return render_template("posts.html", user=current_user, posts=posts, username=username)
+    return render_template("posts.html", user=current_user, posts=posts)
 
 
 @views.route("/create-comment/<post_id>", methods=['POST'])
