@@ -1,4 +1,4 @@
-The blog application is an app that everyone can register and it is ment for people who want to view  and write interesting and different blogs from different categories such as art, horror, science fiction, science and cooking/food. 
+The blog application is an app that everyone can register and it is ment for people who want to view  and write interesting  blogs from different categories such as art, horror, science fiction, science and cooking/food. 
 The app's features :
 •	Sign up to the app
 •	Sign in to the app
